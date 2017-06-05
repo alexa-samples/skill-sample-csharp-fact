@@ -1,0 +1,263 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "GetJoke",
+      "samples": [
+        "tell me a joke",
+        "tell me another one",
+        "tell me another joke",
+        "joke",
+        "another",
+        "another one",
+        "more",
+        "keep telling"
+      ],
+      "slots": []
+    },
+    {
+      "name": "GetNewFactIntent",
+      "samples": [
+        "Give me a fact",
+        "tell me a fact",
+        "another",
+        "a fact",
+        "a space fact",
+        "tell me a space fact",
+        "give me a space fact",
+        "tell me trivia",
+        "tell me a space trivia",
+        "give me trivia",
+        "give me a space trivia",
+        "give me some information",
+        "give me some space information",
+        "tell me something",
+        "give me something"
+      ],
+      "slots": []
+    },
+    {
+      "name": "GetTravelTime",
+      "samples": [
+        "calculate travel time",
+        "how long does it take to travel from {DepartingPlanet} to {ArrivingPlanet} "
+      ],
+      "slots": [
+        {
+          "name": "DepartingPlanet",
+          "type": "Planet",
+          "samples": [
+            "I'm starting from {DepartingPlanet} ",
+            "{DepartingPlanet} ",
+            "I'm going from {DepartingPlanet} to {ArrivingPlanet} "
+          ]
+        },
+        {
+          "name": "ArrivingPlanet",
+          "type": "Planet",
+          "samples": [
+            "I'm going to {ArrivingPlanet} ",
+            "{ArrivingPlanet} "
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetWeather",
+      "samples": [
+        "tell me weather at {Planet} ",
+        "weather at {Planet} ",
+        "tell me weather",
+        "what is weather at {Planet} ",
+        "what is weather"
+      ],
+      "slots": [
+        {
+          "name": "Planet",
+          "type": "Planet",
+          "samples": []
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Planet",
+      "values": [
+        {
+          "name": {
+            "value": "Mercury"
+          }
+        },
+        {
+          "name": {
+            "value": "Venus"
+          }
+        },
+        {
+          "name": {
+            "value": "Earth"
+          }
+        },
+        {
+          "name": {
+            "value": "Mars"
+          }
+        },
+        {
+          "name": {
+            "value": "Jupiter"
+          }
+        },
+        {
+          "name": {
+            "value": "Saturn"
+          }
+        },
+        {
+          "name": {
+            "value": "Uranus"
+          }
+        },
+        {
+          "name": {
+            "value": "Neptune"
+          }
+        },
+        {
+          "name": {
+            "value": "Pluto"
+          }
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "Elicit.Intent-GetTravelTime.IntentSlot-DepartingPlanet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Which planet are you starting from?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-GetTravelTime.IntentSlot-ArrivingPlanet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Which planet are you going to?"
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-GetWeather.IntentSlot-Planet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "which planet's weather do you want to know?"
+        },
+        {
+          "type": "PlainText",
+          "value": "which planet?"
+        },
+        {
+          "type": "PlainText",
+          "value": "weather at which planet?"
+        }
+      ]
+    },
+    {
+      "id": "Confirm.Intent-GetWeather.IntentSlot-Planet",
+      "promptVersion": "1.0",
+      "definitionVersion": "1.0",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "are you certain"
+        },
+        {
+          "type": "PlainText",
+          "value": "do you want to know weather at {Planet} "
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "version": "1.0",
+    "intents": [
+      {
+        "name": "GetJoke",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "GetNewFactIntent",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": []
+      },
+      {
+        "name": "GetTravelTime",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "DepartingPlanet",
+            "type": "Planet",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetTravelTime.IntentSlot-DepartingPlanet"
+            }
+          },
+          {
+            "name": "ArrivingPlanet",
+            "type": "Planet",
+            "elicitationRequired": true,
+            "confirmationRequired": false,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetTravelTime.IntentSlot-ArrivingPlanet"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GetWeather",
+        "confirmationRequired": false,
+        "prompts": {},
+        "slots": [
+          {
+            "name": "Planet",
+            "type": "Planet",
+            "elicitationRequired": true,
+            "confirmationRequired": true,
+            "prompts": {
+              "elicit": "Elicit.Intent-GetWeather.IntentSlot-Planet",
+              "confirm": "Confirm.Intent-GetWeather.IntentSlot-Planet"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
